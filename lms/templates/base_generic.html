@@ -15,38 +15,35 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-
-<div class="container-fluid">
-
-    <div class="row">
-        <div class="col-sm-2">
-            {% block sidebar %}
-                <ul class="sidebar-nav">
-                    <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'books' %}">All books</a></li>
-                </ul>
-
-                <ul class="sidebar-nav">
-                    {% if user.is_authenticated %}
-                        <li>User: {{ user.get_username }}</li>
-                        <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
-                        <li><a href="{% url 'my-requests' %}">My Requests</a></li>
-                        <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
-                    {% endif %}
-                </ul>
-
-
-
-            {% endblock %}
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        {% block sidebar %}
+        <div class="sidebar-heading">Malhotra's Lib Project</div>
+        <div class="list-group list-group-flush">
+            <a href="{% url 'index' %}" class="list-group-item list-group-item-action bg-light">Home</a>
+            <a href="{% url 'books' %}" class="list-group-item list-group-item-action bg-light">All books</a>
+            {% if user.is_authenticated %}
+                <a class="list-group-item bg-light">User: {{ user.get_username }}</a>
+                <a href="{% url 'my-borrowed' %}" class="list-group-item list-group-item-action bg-light">My Borrowed</a>
+                <a href="{% url 'my-requests' %}" class="list-group-item list-group-item-action bg-light">My Requests</a>
+                <a href="{% url 'logout' %}" class="list-group-item list-group-item-action bg-light">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="list-group-item list-group-item-action bg-light">Log-in</a>
+            {% endif %}
         </div>
-        <div class="col-sm-10 ">
-            {% block content %}{% endblock %}
+        {% endblock %}
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
 
-            {% block pagination %}
-                {% if is_paginated %}
-                    <div class="pagination">
+            <div class="row">
+                <div class="col-sm-10 ">
+                    {% block content %}{% endblock %}
+
+                    {% block pagination %}
+                        {% if is_paginated %}
+                            <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
                     <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
@@ -58,14 +55,16 @@
                     <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
-                    </div>
-                {% endif %}
-            {% endblock %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
 
+
+                </div>
+            </div>
 
         </div>
     </div>
-
 </div>
 </body>
 </html>
