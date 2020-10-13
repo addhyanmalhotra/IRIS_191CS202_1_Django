@@ -39,11 +39,12 @@ class RequestAdmin(admin.ModelAdmin):
             bk = rq.book.ISBN
             bk.InStock -= 1
             bk.save()
-            bkinstance.available = False
-            bkinstance.save()
             # create transaction
             tr = Transactions(IssueDate=date.today(), DueDate=date.today() + timedelta(days=7), Request=rq)
             tr.save()
+            bkinstance.available = False
+            bkinstance.last_transaction = tr
+            bkinstance.save()
         queryset.update(isApproved=1)
 
     def reject_requests(self, request, queryset):

@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.views import generic
 
 from .forms import BookUploadForm
-from .models import BookInstance, Book
+from .models import BookInstance, Book, IssueRequest
 
 
 def book_upload_view(request):
@@ -46,15 +46,27 @@ def index(request):
     )
 
 
-class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+class IssueRequestsByUserListView(LoginRequiredMixin, generic.ListView):
+    """Generic class-based view listing issue requests of current user."""
+    model = BookInstance
+    template_name = 'lms/bookinstance_issue_requests_user.html'
+    paginate_by = 10
+    context_object_name = 'issuerequest_list'
+
+    def get_queryset(self):
+        return IssueRequest.objects.filter(borrower=self.request.user)
+
+
+class LoanedBooksByUserListView(generic.ListView):
     """Generic class-based view listing books on loan to current user."""
     model = BookInstance
     template_name = 'lms/bookinstance_list_borrowed_user.html'
     paginate_by = 10
 
     def get_queryset(self):
-        return BookInstance.objects.filter(issuerequest__borrower=self.request.user).filter(available=False)
-
+        context = BookInstance.objects\
+            .filter(issuerequest__borrower=self.request.user)\
+            .filter(issuerequest__transactions__isReturned=False)
 
 class BookListView(generic.ListView):
     """Generic class-based view for a list of books."""

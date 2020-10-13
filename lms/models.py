@@ -25,6 +25,7 @@ class BookInstance(models.Model):
                                     default=0)
     available = models.BooleanField(default=True)
     Images = models.ImageField(upload_to='media/', blank=True, null=True)
+    last_transaction = models.ForeignKey('Transactions', models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
         return self.ISBN.BookTitle

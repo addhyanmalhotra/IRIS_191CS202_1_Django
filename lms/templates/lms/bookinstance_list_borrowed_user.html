@@ -7,8 +7,13 @@
     <ul>
 
       {% for bookinst in bookinstance_list %} 
-      <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
-        <a href="{% url 'book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }})        
+      <li>
+        <a href="">{{bookinst.ISBN.BookTitle}}</a>
+          <ul>
+              <li><strong>Due Date :</strong>{{ bookinst.last_transaction.DueDate }}</li>
+              <li><strong>Issue Date</strong>{{ bookinst.last_transaction.IssueDate }}</li>
+              <li><strong>Transaction id:</strong>NITK-TR0{{ bookinst.last_transaction.id }}</li>
+          </ul>
       </li>
       {% endfor %}
     </ul>
