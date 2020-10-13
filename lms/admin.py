@@ -51,6 +51,13 @@ class RequestAdmin(admin.ModelAdmin):
         queryset.update(isApproved=2)
 
 
+class TransactionAdmin(admin.ModelAdmin):
+    actions = ['mark_as_returned']
+
+    def mark_as_returned(self, request, queryset):
+        bi = self.book
+
+
 admin.site.register(BookInstance, BIAdmin)
 admin.site.register(Book, BookAdmin)
 admin.site.register(IssueRequest, RequestAdmin)

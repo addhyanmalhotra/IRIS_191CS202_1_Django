@@ -1,5 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.shortcuts import render
@@ -57,7 +58,7 @@ class IssueRequestsByUserListView(LoginRequiredMixin, generic.ListView):
         return IssueRequest.objects.filter(borrower=self.request.user)
 
 
-class LoanedBooksByUserListView(generic.ListView):
+class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on loan to current user."""
     model = BookInstance
     template_name = 'lms/bookinstance_list_borrowed_user.html'
@@ -67,6 +68,7 @@ class LoanedBooksByUserListView(generic.ListView):
         context = BookInstance.objects\
             .filter(issuerequest__borrower=self.request.user)\
             .filter(issuerequest__transactions__isReturned=False)
+        return context
 
 class BookListView(generic.ListView):
     """Generic class-based view for a list of books."""
@@ -77,3 +79,10 @@ class BookListView(generic.ListView):
 class BookDetailView(generic.DetailView):
     """Generic class-based detail view for a book."""
     model = Book
+
+
+@login_required
+def issuebook(request, bi_id):
+    ir = IssueRequest(borrower=request.user, book=BookInstance.objects.get(id=bi_id))
+    ir.save()
+    return redirect('../issue')

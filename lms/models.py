@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import date
 
 # Create your models here.
 class Book(models.Model):
@@ -41,8 +41,8 @@ class IssueRequest(models.Model):
 
 
 class Transactions(models.Model):
-    IssueDate = models.DateField()
-    DueDate = models.DateField()
+    IssueDate = models.DateField(default=date.today())
+    DueDate = models.DateField(default=date.today())
     Request = models.ForeignKey('IssueRequest', on_delete=models.RESTRICT)
     isReturned = models.BooleanField(default=False)
 
