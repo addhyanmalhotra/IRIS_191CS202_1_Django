@@ -27,6 +27,9 @@ class BookInstance(models.Model):
     Images = models.ImageField(upload_to='media/', blank=True, null=True)
     last_transaction = models.ForeignKey('Transactions', models.DO_NOTHING, blank=True, null=True)
 
+    class Meta:
+        ordering = ['-available']
+
     def __str__(self):
         return self.ISBN.BookTitle
 

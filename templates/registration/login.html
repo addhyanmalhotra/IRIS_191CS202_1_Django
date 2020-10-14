@@ -3,38 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=text], select, textarea,input[type=password] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        input[type=submit] {
+            background-color: #1f1f1f;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        input[type=submit]:hover {
+            background-color: #5b5b5b;
+        }
+
+        .container {
+            border-radius: 5px;
+            align-content: center;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .col-25 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+        }
+
+        .col-75 {
+            float: left;
+            width: 75%;
+            margin-top: 6px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+
+        /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+            .col-25, .col-75, input[type=submit] {
+                width: 100%;
+                margin-top: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
+{% endif %}
 
-  {% if next %}
-    {% if user.is_authenticated %}
-      <p>Your account doesn't have access to this page. To proceed,
-      please login with an account that has access.</p>
-    {% else %}
-      <p>Please login to see this page.</p>
-    {% endif %}
-  {% endif %}
+<div class="container">
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="row" align="center">
+            <h1>Log in :)</h1>
+        </div>
+        <div class="row">
+            <div class='col-25'>{{ form.username.label_tag }}</div>
+            <div class='col-75'>{{ form.username }}</div>
+        </div>
+        <div class="row">
+            <div class='col-25'>{{ form.password.label_tag }}</div>
+            <div class='col-75'>{{ form.password }}</div>
+        </div>
+        <br>
+        <div class="row"><input type="submit" value="login"/></div>
+        <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    </form>
+</div>
+{# Assumes you setup the password_reset view in your URLconf #}
 
-  <form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <table>
-      <tr>
-        <td>{{ form.username.label_tag }}</td>
-        <td>{{ form.username }}</td>
-      </tr>
-      <tr>
-        <td>{{ form.password.label_tag }}</td>
-        <td>{{ form.password }}</td>
-      </tr>
-    </table>
-    <input type="submit" value="login" />
-    <input type="hidden" name="next" value="{{ next }}" />
-  </form>
-
-  {# Assumes you setup the password_reset view in your URLconf #}
-  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 </body>
 </html>
