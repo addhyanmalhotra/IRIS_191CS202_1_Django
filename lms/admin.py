@@ -4,10 +4,29 @@ from datetime import date
 from datetime import timedelta
 
 
+class ExportCsvMixin:
+    def export_as_csv(self, request, queryset):
+
+        meta = self.model._meta
+        field_names = [field.name for field in meta.fields]
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
+        writer = csv.writer(response)
+
+        writer.writerow(field_names)
+        for obj in queryset:
+            row = writer.writerow([getattr(obj, field) for field in field_names])
+
+        return response
+
+    export_as_csv.short_description = "Export Selected"
+
+
 # Register your models here.
-class BIAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'BookId', 'Condition', 'last_transaction','available')
-    readonly_fields = ['available']
+class BIAdmin(admin.ModelAdmin,ExportCsvMixin):
+    list_display = ('__str__', 'BookId', 'Condition', 'last_transaction', 'available', 'export_as_csv')
+    readonly_fields = ['available', 'last_transaction']
     list_filter = ['Condition', 'available']
 
     def save_model(self, request, obj, form, change):
@@ -26,15 +45,16 @@ class BIAdmin(admin.ModelAdmin):
         super(BIAdmin, self).delete_model(request, obj)
 
 
-class BookAdmin(admin.ModelAdmin):
+class BookAdmin(admin.ModelAdmin, ExportCsvMixin):
     readonly_fields = ['Quantity', 'InStock']
     list_display = ('__str__', 'Quantity', 'InStock', 'Images')
+    actions = ['export_as_csv']
 
 
-class RequestAdmin(admin.ModelAdmin):
+class RequestAdmin(admin.ModelAdmin, ExportCsvMixin):
     readonly_fields = ['borrower', 'book']
 
-    actions = ['approve_requests', 'reject_requests']
+    actions = ['approve_requests', 'reject_requests', 'export_as_csv']
     list_filter = ("isApproved", "borrower", "book")
     list_display = ("__str__", "isApproved", "borrower", "book")
 
@@ -58,8 +78,8 @@ class RequestAdmin(admin.ModelAdmin):
         queryset.update(isApproved=2)
 
 
-class TransactionAdmin(admin.ModelAdmin):
-    actions = ['mark_as_returned']
+class TransactionAdmin(admin.ModelAdmin, ExportCsvMixin):
+    actions = ['mark_as_returned', 'export_as_csv']
     list_display = ('__str__', 'IssueDate', 'DueDate', 'isReturned')
     list_filter = ('IssueDate', 'DueDate', 'isReturned')
 
