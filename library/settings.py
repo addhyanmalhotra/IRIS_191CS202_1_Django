@@ -24,7 +24,7 @@ SECRET_KEY = 'g2!#@l*rj$v@5dh219tgts!$k($tv-fh%ftg5xj3@-kmtqi!x0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['iris-rec-task.herokuapp.com']
 
 # Application definition
 
