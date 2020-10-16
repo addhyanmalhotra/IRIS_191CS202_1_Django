@@ -1,27 +1,3 @@
-<!--
-*** Thanks for checking out this README Template. If you have a suggestion that would
-*** make this better, please fork the repo and create a pull request or simply open
-*** an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
-***
-***
-***
-*** To avoid retyping too much info. Do a search and replace for the following:
-*** github_username, IRIS_RECTASK_LIB, twitter_handle, addhyanmalhotra@gmail.com
--->
-
-
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 
 
 
@@ -29,10 +5,10 @@
 <br />
 <p align="center">
   <a href="https://github.com/addhyanmalhotra/IRIS_RECTASK_LIB">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://pbs.twimg.com/profile_images/1283969913606926336/-OXfly6z_200x200.jpg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">YOUR_TITLE</h3>
+  <h3 align="center">Library Rec Task</h3>
 
   <p align="center">
     A library management application, developed as recruitment task for iris nitk
@@ -153,10 +129,12 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 - [ ] Lazy Loading
-- [ ] CSV export of Models
+- [ ] Impliment PWA
+- [ ] Setup a proper CDN ( not required unless scaled)
+- [x] CSV export of Models
 - [x] Simple responsive UI (using bootstrap)
 - [ ] Clean Modern UI (using react)
-- [x] Single Table
+- [x] Single Table for User and Admin
 - [ ] Migrate to NoSQL
 - [x] Optimise Tables
 
