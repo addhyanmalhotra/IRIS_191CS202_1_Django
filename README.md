@@ -59,6 +59,8 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
+* [Roadmap](#roadmap)
+* [Issues](#iisues)
 * [License](#license)
 * [Contact](#contact)
 
@@ -148,10 +150,20 @@ once approved a new transaction will be created
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
+<!-- ROADMAP -->
+## Roadmap
+- [ ] Lazy Loading
+- [ ] CSV export of Models
+- [x] Simple responsive UI (using bootstrap)
+- [ ] Clean Modern UI (using react)
+- [x] Single Table
+- [ ] Migrate to NoSQL
+- [x] Optimise Tables
 
+## Issues 
 
-
-
+* Password Reset UI not un-implimented 
+* App not secure need to find way to hide app secret
 
 <!-- LICENSE -->
 ## License
