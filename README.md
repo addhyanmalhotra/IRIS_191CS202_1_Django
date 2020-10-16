@@ -140,6 +140,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Issues 
 
+* Author Details Table not implimented
 * Password Reset UI not un-implimented 
 * App not secure need to find way to hide app secret
 
