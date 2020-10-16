@@ -1,10 +1,15 @@
+import csv
+
 from django.contrib import admin
+from django.http import HttpResponse
+
 from .models import *
 from datetime import date
 from datetime import timedelta
 
 
 class ExportCsvMixin:
+
     def export_as_csv(self, request, queryset):
 
         meta = self.model._meta
@@ -24,10 +29,12 @@ class ExportCsvMixin:
 
 
 # Register your models here.
-class BIAdmin(admin.ModelAdmin,ExportCsvMixin):
-    list_display = ('__str__', 'BookId', 'Condition', 'last_transaction', 'available', 'export_as_csv')
+class BIAdmin(admin.ModelAdmin, ExportCsvMixin):
+    list_display = ('__str__', 'BookId', 'Condition', 'last_transaction', 'available')
     readonly_fields = ['available', 'last_transaction']
+    actions = ['export_as_csv']
     list_filter = ['Condition', 'available']
+
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -57,6 +64,8 @@ class RequestAdmin(admin.ModelAdmin, ExportCsvMixin):
     actions = ['approve_requests', 'reject_requests', 'export_as_csv']
     list_filter = ("isApproved", "borrower", "book")
     list_display = ("__str__", "isApproved", "borrower", "book")
+
+
 
     def approve_requests(self, request, queryset):
         for rq in queryset:
