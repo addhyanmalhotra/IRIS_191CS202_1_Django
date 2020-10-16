@@ -37,7 +37,7 @@ class BookInstance(models.Model):
 class IssueRequest(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     book = models.ForeignKey('BookInstance', on_delete=models.DO_NOTHING)
-    isApproved = models.IntegerField(default=0, choices=[(0, 'Pending'), (1, 'Approved'), (2, 'Rejected')])
+    isApproved = models.IntegerField(default=0, choices=[(0, 'Pending'), (1, 'Approved'), (2, 'Rejected'), (3, 'Approved->Returned')])
 
     def __str__(self):
         return "NITK-IR0"+str(self.pk)

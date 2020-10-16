@@ -55,7 +55,7 @@ class IssueRequestsByUserListView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'issuerequest_list'
 
     def get_queryset(self):
-        return IssueRequest.objects.filter(borrower=self.request.user)
+        return IssueRequest.objects.filter(borrower=self.request.user).order_by('-id')
 
 
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):

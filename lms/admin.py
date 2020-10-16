@@ -6,7 +6,9 @@ from datetime import timedelta
 
 # Register your models here.
 class BIAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'BookId', 'Condition', 'last_transaction','available')
     readonly_fields = ['available']
+    list_filter = ['Condition', 'available']
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -25,16 +27,21 @@ class BIAdmin(admin.ModelAdmin):
 
 
 class BookAdmin(admin.ModelAdmin):
-    readonly_fields = ['Quantity']
+    readonly_fields = ['Quantity', 'InStock']
+    list_display = ('__str__', 'Quantity', 'InStock', 'Images')
 
 
 class RequestAdmin(admin.ModelAdmin):
-    # readonly_fields = ['borrower', 'book']
+    readonly_fields = ['borrower', 'book']
+
     actions = ['approve_requests', 'reject_requests']
     list_filter = ("isApproved", "borrower", "book")
+    list_display = ("__str__", "isApproved", "borrower", "book")
 
     def approve_requests(self, request, queryset):
         for rq in queryset:
+            if rq.isApproved == 1:
+                continue
             bkinstance = rq.book
             bk = rq.book.ISBN
             bk.InStock -= 1
@@ -53,12 +60,24 @@ class RequestAdmin(admin.ModelAdmin):
 
 class TransactionAdmin(admin.ModelAdmin):
     actions = ['mark_as_returned']
+    list_display = ('__str__', 'IssueDate', 'DueDate', 'isReturned')
+    list_filter = ('IssueDate', 'DueDate', 'isReturned')
 
     def mark_as_returned(self, request, queryset):
-        bi = self.book
+        for tr in queryset:
+            ir =tr.Request
+            ir.isApproved = 3
+            ir.save()
+            bi = tr.Request.book
+            bi.available = True
+            bk = bi.ISBN
+            bk.InStock += 1
+            bi.save()
+            bk.save()
+        queryset.update(isReturned=True)
 
 
 admin.site.register(BookInstance, BIAdmin)
 admin.site.register(Book, BookAdmin)
 admin.site.register(IssueRequest, RequestAdmin)
-admin.site.register(Transactions)
+admin.site.register(Transactions, TransactionAdmin)

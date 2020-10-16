@@ -1,101 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
 
-        input[type=text], select, textarea,input[type=password] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            resize: vertical;
-        }
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}">
+{{ form.media }}
+{% endblock %}
 
-        label {
-            padding: 12px 12px 12px 0;
-            display: inline-block;
-        }
+{% block bodyclass %}{{ block.super }} login{% endblock %}
 
-        input[type=submit] {
-            background-color: #1f1f1f;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-        }
+{% block usertools %}{% endblock %}
 
-        input[type=submit]:hover {
-            background-color: #5b5b5b;
-        }
+{% block nav-global %}{% endblock %}
 
-        .container {
-            border-radius: 5px;
-            align-content: center;
-            background-color: #f2f2f2;
-            padding: 20px;
-        }
+{% block nav-sidebar %}{% endblock %}
 
-        .col-25 {
-            float: left;
-            width: 25%;
-            margin-top: 6px;
-        }
+{% block content_title %}{% endblock %}
 
-        .col-75 {
-            float: left;
-            width: 75%;
-            margin-top: 6px;
-        }
+{% block breadcrumbs %}{% endblock %}
 
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-
-        /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-            .col-25, .col-75, input[type=submit] {
-                width: 100%;
-                margin-top: 0;
-            }
-        }
-    </style>
-</head>
-<body>
-{% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
+{% block content %}
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote">
+{% if form.errors.items|length == 1 %}{% translate "Please correct the error below." %}{% else %}{% translate "Please correct the errors below." %}{% endif %}
+</p>
 {% endif %}
 
-<div class="container">
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        <div class="row" align="center">
-            <h1>Log in :)</h1>
-        </div>
-        <div class="row">
-            <div class='col-25'>{{ form.username.label_tag }}</div>
-            <div class='col-75'>{{ form.username }}</div>
-        </div>
-        <div class="row">
-            <div class='col-25'>{{ form.password.label_tag }}</div>
-            <div class='col-75'>{{ form.password }}</div>
-        </div>
-        <br>
-        <div class="row"><input type="submit" value="login"/></div>
-        <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-    </form>
-</div>
-{# Assumes you setup the password_reset view in your URLconf #}
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
 
-</body>
-</html>
+<div id="content-main">
+
+{% if user.is_authenticated %}
+<p class="errornote">
+{% blocktranslate trimmed %}
+    You are authenticated as {{ username }}, but are not authorized to
+    access this page. Would you like to login to a different account?
+{% endblocktranslate %}
+</p>
+{% endif %}
+
+<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+  <div class="form-row">
+    {{ form.username.errors }}
+    {{ form.username.label_tag }} {{ form.username }}
+  </div>
+  <div class="form-row">
+    {{ form.password.errors }}
+    {{ form.password.label_tag }} {{ form.password }}
+    <input type="hidden" name="next" value="{{ next }}">
+  </div>
+  {% url 'admin_password_reset' as password_reset_url %}
+  {% if password_reset_url %}
+  <div class="password-reset-link">
+    <a href="{{ password_reset_url }}">{% translate 'Forgotten your password or username?' %}</a>
+  </div>
+  {% endif %}
+  <div class="submit-row">
+    <input type="submit" value="{% translate 'Log in' %}">
+  </div>
+</form>
+
+</div>
+{% endblock %}

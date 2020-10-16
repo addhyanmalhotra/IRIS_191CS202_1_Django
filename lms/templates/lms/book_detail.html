@@ -1,10 +1,11 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-
     <h1>Title: {{ book.BookTitle }}</h1>
+    <img src="{{ book.Images.url }}">
     <p><strong>Summary:</strong> {{ book.Description }}</p>
     <p><strong>ISBN:</strong> {{ book.ISBN }}</p>
+    
 
     <div style="margin-left:20px;margin-top:20px">
         <h4>Copies</h4>
