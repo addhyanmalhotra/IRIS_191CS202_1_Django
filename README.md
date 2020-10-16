@@ -16,7 +16,7 @@
     <a href="https://github.com/addhyanmalhotra/IRIS_RECTASK_LIB"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/addhyanmalhotra/IRIS_RECTASK_LIB">View Demo</a>
+    <a href="https://iris-rec-task.herokuapp.com/">View Demo</a>
     ·
     <a href="https://github.com/addhyanmalhotra/IRIS_RECTASK_LIB/issues">Report Bug</a>
     ·
@@ -148,12 +148,16 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-
+## Refernces
+- [Start Bootstrap]()
+- [Django - Docs]()
+- [Heroku Docs]()
+- [Deploying on Heroku SimplebetterthanComplex](https://simpleisbetterthancomplex.com/tutorial/2016/08/09/how-to-deploy-django-applications-on-heroku.html)
 
 <!-- CONTACT -->
 ## Contact
 
-Addhyan Malhotra - [@twitter_handle](https://twitter.com/twitter_handle) - addhyanmalhotra@gmail.com
+Addhyan Malhotra - addhyanmalhotra@gmail.com
 
 Project Link: [https://github.com/addhyanmalhotra/IRIS_RECTASK_LIB](https://github.com/addhyanmalhotra/IRIS_RECTASK_LIB)
 
