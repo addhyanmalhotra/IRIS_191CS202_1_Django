@@ -182,7 +182,7 @@ Project Link: [https://github.com/addhyanmalhotra/IRIS_RECTASK_LIB](https://gith
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/addhyanmalhotra/repo.svg?style=flat-square
-[contributors-url]: https://github.com/addhyanmalhotra/repo/graphs/contributors
+[contributors-url]: https://github.com/addhyanmalhotra
 [forks-shield]: https://img.shields.io/github/forks/addhyanmalhotra/repo.svg?style=flat-square
 [forks-url]: https://github.com/addhyanmalhotra/repo/network/members
 [stars-shield]: https://img.shields.io/github/stars/addhyanmalhotra/repo.svg?style=flat-square
