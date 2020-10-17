@@ -129,7 +129,7 @@ once approved a new transaction will be created
 
 <!-- ROADMAP -->
 ## Roadmap
-- [ ] Lazy Loading
+- [ ] ~~Lazy Loading~~ (Django Lazy loads query sets by default :))
 - [ ] Impliment PWA
 - [ ] Setup a proper CDN ( not required unless scaled)
 - [x] CSV export of Models
