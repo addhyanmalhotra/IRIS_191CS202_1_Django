@@ -8,7 +8,7 @@
         <ul>
         {% for issuerequest in issuerequest_list %}
       <li>
-        <a href="">{{issuerequest.book.ISBN.BookTitle}}</a>
+        <a href="../books/{{ issuerequest.ISBN_id }}">{{issuerequest.book.ISBN.BookTitle}}</a>
           <ul>
               <p class="{% if issuerequest.isApproved == '0' %}text-warning{% elif issuerequest.isApproved == '2' %}text-danger{% else %}text-muted{% endif %}"><strong>Status: </strong>{{ issuerequest.get_isApproved_display }}</p>
               <p class="text-muted"><strong>Request ID: </strong>NITK-IR00{{ issuerequest.pk }}</p>

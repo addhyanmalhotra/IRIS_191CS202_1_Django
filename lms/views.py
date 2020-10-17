@@ -83,6 +83,14 @@ class BookDetailView(generic.DetailView):
 
 @login_required
 def issuebook(request, bi_id):
-    ir = IssueRequest(borrower=request.user, book=BookInstance.objects.get(id=bi_id))
-    ir.save()
+    usr = request.user
+    booki = BookInstance.objects.get(id=bi_id)
+    if IssueRequest.objects.filter(borrower=usr).filter(book=booki).filter(isApproved=0).exists():
+        pass
+    else:
+        ir = IssueRequest(borrower=usr, book=booki)
+        ir.save()
     return redirect('../issue')
+
+
+
