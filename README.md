@@ -135,7 +135,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [x] Simple responsive UI (using bootstrap)
 - [ ] Clean Modern UI (using react)
 - [x] Single Table for User and Admin
-- [ ] Migrate to NoSQL
+- [ ] Migrate to NoSql ( for learning reasons )
 - [x] Optimise Tables
 
 ## Issues 
@@ -152,7 +152,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Refernces
 - [Start Bootstrap]()
 - [Django - Docs]()
+- [white noise docs]()
 - [Heroku Docs]()
+- [Beginners Gude to kick ass readmes](https://medium.com/@meakaakka/a-beginners-guide-to-writing-a-kickass-readme-7ac01da88ab3)
+
 - [Deploying on Heroku SimplebetterthanComplex](https://simpleisbetterthancomplex.com/tutorial/2016/08/09/how-to-deploy-django-applications-on-heroku.html)
 
 <!-- CONTACT -->
