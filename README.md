@@ -124,7 +124,6 @@ once approved a new transaction will be created
 * Transactions list the Book transactions made
  (Each of the above resouces can be exported to CSSV from respective dashboards)
 
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -141,7 +140,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Issues 
 
 * Author Details Table not implimented
-* Password Reset UI not un-implimented 
+* Password Reset UI not implimented 
 * App not secure need to find way to hide app secret
 
 <!-- LICENSE -->
