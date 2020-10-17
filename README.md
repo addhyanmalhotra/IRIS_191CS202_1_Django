@@ -136,7 +136,7 @@ once approved a new transaction will be created
 - [x] Simple responsive UI (using bootstrap)
 - [ ] Clean Modern UI (using react)
 - [x] Single Table for User and Admin
-- [ ] Migrate to NoSql ( for learning reasons )
+- [ ] Migrate to NoSql for Book model (Details like description ISBN etc) while keepking transaction details in SQL format
 - [x] Optimise Tables
 
 ## Issues 
