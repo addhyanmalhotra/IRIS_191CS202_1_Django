@@ -146,6 +146,7 @@ once approved a new transaction will be created
 - [x] ~~Chrom reports security breach on logging in as admin~~ (happens cuz uname=admin pass=admin is a very insecure cred, will be updated after demo)
 - [ ] Author Details Table not implimented
 - [ ] Password Reset UI not implimented 
+- [ ] Deployment and Local repo use same database (bad practice)
 
 <!-- LICENSE -->
 ## License
