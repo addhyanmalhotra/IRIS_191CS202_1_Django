@@ -61,7 +61,7 @@ It allows management of resouces and is primarily divided into two sections
 
 
 <!-- GETTING STARTED -->
-## Getting Started (install is optional you can access the website here [Deployed Demo](https://iris-rec-task.herokuapp.com/)
+## Getting Started (install is optional you can access the website here [Deployed Demo](https://iris-rec-task.herokuapp.com/))
 
 To get a local copy up and running follow these simple steps.
 
