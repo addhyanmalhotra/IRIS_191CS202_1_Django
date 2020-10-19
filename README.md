@@ -141,9 +141,9 @@ once approved a new transaction will be created
 
 ## Issues 
 
-* Author Details Table not implimented
-* Password Reset UI not implimented 
-* App not secure need to find way to hide app secret
+- [x] ~~Chrom reports security breach on logging in as admin~~ (happens cuz uname=admin pass=admin is a very insecure cred, will be updated after demo)
+- [ ] Author Details Table not implimented
+- [ ] Password Reset UI not implimented 
 
 <!-- LICENSE -->
 ## License
