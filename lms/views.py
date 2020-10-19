@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
@@ -8,6 +9,7 @@ from django.views import generic
 
 from .forms import BookUploadForm
 from .models import BookInstance, Book, IssueRequest
+from django.db.models import Q
 
 
 def book_upload_view(request):
@@ -85,7 +87,8 @@ class BookDetailView(generic.DetailView):
 def issuebook(request, bi_id):
     usr = request.user
     booki = BookInstance.objects.get(id=bi_id)
-    if IssueRequest.objects.filter(borrower=usr).filter(book=booki).filter(isApproved=0).exists():
+    if IssueRequest.objects.filter(borrower=usr).filter(book=booki).filter(Q(isApproved=0) | Q(isApproved=1)).exists():
+        messages.info(request, 'Your request is not added in leu of an ongoing/pending transaction')
         pass
     else:
         ir = IssueRequest(borrower=usr, book=booki)
