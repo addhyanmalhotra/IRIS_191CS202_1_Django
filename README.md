@@ -105,7 +105,9 @@ python manage.py runserver
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
+ login credentials(uname,pass)
+  **Staff account :** admin, admin
+  **user account :** 191cs202, irisrecs
 ### Member
 The landing page leads you to the member dashboard, this shows basic project information like UML structure and has menu options loging in gives you access to
 * Request Borrowing
